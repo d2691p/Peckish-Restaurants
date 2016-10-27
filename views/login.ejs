@@ -1,0 +1,15 @@
+<% include ./partials/header %>
+<link href="/stylesheets/main.css" rel="stylesheet">
+    <h1 class="login-title" style="text-align:center;">Access your Peckish Account</h1>
+    <div class="login-box">
+        <form action="/login" method="POST">
+            <div class="form-group">
+                 <input class="form-control" type="text" name="username" placeholder="Username">
+            </div>
+            <div class="form-group">
+                <input class="form-control" type="password" name="password" placeholder="Password">
+            </div>
+            <button class="btn btn-lg btn-block btn-peckish">Login</button>
+        </form>
+    </div>
+<% include ./partials/footer %>

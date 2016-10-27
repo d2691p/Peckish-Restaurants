@@ -1,0 +1,16 @@
+<% include ./partials/header %>
+<link href="/stylesheets/main.css" rel="stylesheet">
+    <h1 class="register-title" style="text-align:center;">Create a Peckish Account</h1>
+    <div class="register-box">
+        <form action="/register" method="POST">
+            <div class="form-group">
+                 <input class="form-control" type="text" name="username" placeholder="Username">
+            </div>
+            <div class="form-group">
+                <input class="form-control" type="password" name="password" placeholder="Password">
+            </div>
+            <button class="btn btn-lg btn-block btn-peckish">Sign Up</button>
+        </form>
+    </div>
+
+<% include ./partials/footer %>

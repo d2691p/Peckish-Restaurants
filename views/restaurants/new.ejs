@@ -1,0 +1,42 @@
+<% include ../partials/header %>
+<link href="/stylesheets/main.css" rel="stylesheet">
+<div class="container">
+    <div class="row">
+        <h1 style="text-align:center;">Add a new Restaurant</h1>
+        <div class="restaurant-box">
+            <form action="/restaurants" method="POST">
+                <div class="form-group">
+                     <input class="form-control" type="text" placeholder="Name" name="name">
+                </div>
+                <div class="form-group">
+                    <input class="form-control" type="text" placeholder="Image URL" name="image">
+                </div>
+                <div class="form-group">
+                    <input class="form-control" type="text" placeholder="Location" name="location">
+                </div>
+                <div class="form-group">
+                    <input class="form-control" type="text" placeholder="Cuisine" name="cuisine">
+                </div>
+                <div class="form-group stars">
+                        <span>Price Range:    </span>
+                        <input class="star pound pound-3" id="pound-3" type="radio" name="restaurant[pound3]"/>
+                        <label class="star pound pound-3" for="pound-3"></label>
+                        <input class="star pound pound-2" id="pound-2" type="radio" name="restaurant[pound2]"/>
+                        <label class="star pound pound-2" for="pound-2"></label>
+                        <input class="star pound pound-1" id="pound-1" type="radio" name="restaurant[pound1]"/>
+                        <label class="star pound pound-1" for="pound-1"></label>
+                </div>
+                 <div class="form-group">
+                    <textarea class="form-control" rows="5" placeholder="Description" name="description"></textarea>
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-lg btn-block btn-peckish">Submit!</button>
+                </div>
+            </form>
+    
+            <a href="/restaurants">Back</a>
+        </div>
+    </div>
+</div>
+
+<% include ../partials/footer %>

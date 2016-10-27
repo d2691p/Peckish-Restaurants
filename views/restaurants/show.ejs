@@ -1,0 +1,81 @@
+<% include ../partials/header%>
+<link href="/stylesheets/main.css" rel="stylesheet">
+<div class="container">
+    <div class="row">
+        <div class="col-md-3">
+            <h2><a><%=restaurant.name%></a></h2>
+            <div class-"list-group">
+                <li class="list-group-item">Price Rating: 
+                    <% for(var i=1; i<=restaurant.price; i++){ %> 
+                        <i class="restaurant-info pull-right fa fa-gbp"></i>
+                    <% } %>
+                </li>
+                <li class="list-group-item">Cuisine: <span class="restaurant-info pull-right"><%=restaurant.cuisine%></span> </li>
+                <li class="list-group-item">Location: <span class="restaurant-info pull-right"><%=restaurant.location%></span></li>
+                <li class="list-group-item">Average Rating: 
+                    <% var sum =0;
+                        restaurant.comments.forEach(function(comment){ 
+                            sum += parseInt(comment.rating);
+                        }); 
+                        var averageRating = Math.round(sum / restaurant.comments.length);
+                        
+                        for(var k = 0; k < averageRating; k++){ %>
+                            <i class="pull-right fa fa-star"></i>
+                        <% } %>
+                </li>
+            </div>
+        </div>
+        <div class="col-md-9">
+            <div class="thumbnail">
+                <img class="img-responsive" src="<%=restaurant.image%>">
+                <div class="caption-full">
+                    <p><%=restaurant.description%></p>
+                    <p><em>Submitted by <%=restaurant.author.username%></em></p>
+                    
+                    <% if(currentUser && restaurant.author.id.equals(currentUser._id)){ %>
+                        <a href="/restaurants/<%=restaurant._id%>/edit" class="btn btn-xs btn-warning">Edit</a>
+                        <form id="delete-form" action="/restaurants/<%= restaurant._id %>?_method=DELETE" method="POST">
+                            <button class="btn-xs btn btn-danger">Delete</button>
+                        </form>
+                    <% } %>
+                </div>
+                
+            </div>
+            <div class="well">
+                <div class="text-right">
+                    <a class="btn btn-success" href="/restaurants/<%=restaurant._id%>/comments/new">Add New Comment</a>
+                </div>
+                <% restaurant.comments.forEach(function(comment){ %>
+                    <div class="row">
+                        <div class="col-md-12 comment-container">
+                            <div>
+                                <strong><%= comment.author.username %></strong>
+                                <span class="pull-right"><%= comment.createdAt.toUTCString() %></span>
+                            </div>
+                            <div class="pull-right">
+                                <% for(var i=1; i <= comment.rating; i++){ %>
+                                <i class="fa fa-star"></i>
+                                <% } %>
+                            </div>
+                            <br>
+                            <p>
+                                <%= comment.text %> 
+                            </p>
+                            <br>
+                        <% if(currentUser && comment.author.id.equals(currentUser._id)){ %>
+                            <a class="btn btn-xs btn-warning" 
+                               href="/restaurants/<%=restaurant._id %>/comments/<%=comment._id %>/edit">Edit</a>
+                            <form id="delete-form" action="/restaurants/<%=restaurant._id %>/comments/<%=comment._id %>?_method=DELETE" method="POST">
+                                <input type="submit" class="btn btn-xs btn-danger" value="Delete">
+                            </form>
+                        <% } %>
+                        </div>
+                    </div>
+                <% }) %>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<%include ../partials/footer%>
